@@ -114,3 +114,71 @@ function gameObject() {
         },
     };
 }
+
+
+const gameData = gameObject();
+
+
+
+// 1. Returns the points scored by the given player
+function numPointsScored(playerName) {
+    const allPlayers = Object.assign({}, gameData.home.players, gameData.away.players);
+    const player = allPlayers[playerName];
+    return player.points;
+}
+
+// 2. Returns the shoe size of the given player
+function shoeSize(playerName) {
+    const allPlayers = Object.assign({}, gameData.home.players, gameData.away.players);
+    const player = allPlayers[playerName];
+    return player.shoe;
+}
+
+// 3. Returns an array of the team’s colors
+function teamColors(teamName) {
+    if (gameData.home.teamName === teamName) {
+        return gameData.home.colors;
+    } else {
+        return gameData.away.colors;
+    }
+}
+
+// 4. Returns an array of both team names
+function teamNames() {
+    return [gameData.home.teamName, gameData.away.teamName];
+}
+
+// 5. Returns an array of jersey numbers for the given team
+function playerNumbers(teamName) {
+    let team;
+    if (gameData.home.teamName === teamName) {
+        team = gameData.home;
+    } else {
+        team = gameData.away;
+    }
+    return Object.values(team.players).map(function(player) {
+        return player.number;
+    });
+}
+
+// 6. Returns an object containing all stats for the given player
+function playerStats(playerName) {
+    const allPlayers = Object.assign({}, gameData.home.players, gameData.away.players);
+    return allPlayers[playerName];
+}
+
+// 7. Finds player with largest shoe size and returns their rebounds
+function bigShoeRebounds() {
+    const allPlayers = Object.assign({}, gameData.home.players, gameData.away.players);
+    const playersArray = Object.values(allPlayers);
+
+    const winner = playersArray.reduce(function(highestSoFar, currentPlayer) {
+        if (currentPlayer.shoe > highestSoFar.shoe) {
+            return currentPlayer;
+        } else {
+            return highestSoFar;
+        }
+    });
+
+    return winner.rebounds;
+}
