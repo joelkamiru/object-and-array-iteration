@@ -118,18 +118,16 @@ function gameObject() {
 
 const gameData = gameObject();
 
-
-
 // 1. Returns the points scored by the given player
 function numPointsScored(playerName) {
-    const allPlayers = Object.assign({}, gameData.home.players, gameData.away.players);
+    const allPlayers = { ...gameData.home.players, ...gameData.away.players };
     const player = allPlayers[playerName];
     return player.points;
 }
 
 // 2. Returns the shoe size of the given player
 function shoeSize(playerName) {
-    const allPlayers = Object.assign({}, gameData.home.players, gameData.away.players);
+    const allPlayers = { ...gameData.home.players, ...gameData.away.players };
     const player = allPlayers[playerName];
     return player.shoe;
 }
@@ -163,15 +161,16 @@ function playerNumbers(teamName) {
 
 // 6. Returns an object containing all stats for the given player
 function playerStats(playerName) {
-    const allPlayers = Object.assign({}, gameData.home.players, gameData.away.players);
+    const allPlayers = { ...gameData.home.players, ...gameData.away.players };
     return allPlayers[playerName];
 }
 
 // 7. Finds player with largest shoe size and returns their rebounds
 function bigShoeRebounds() {
-    const allPlayers = Object.assign({}, gameData.home.players, gameData.away.players);
+    const allPlayers = { ...gameData.home.players, ...gameData.away.players };
     const playersArray = Object.values(allPlayers);
 
+    // Use reduce to find the player object with the highest shoe value
     const winner = playersArray.reduce(function(highestSoFar, currentPlayer) {
         if (currentPlayer.shoe > highestSoFar.shoe) {
             return currentPlayer;
